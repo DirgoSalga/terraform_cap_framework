@@ -24,8 +24,7 @@ resource "azuread_conditional_access_policy" "ca000" {
       excluded_groups = [
         azuread_group.breakglass.object_id,
         azuread_group.ca000_exclusion.object_id,
-        azuread_group.ca101_exclusion.object_id,
-        azuread_group.ca105_exclusion.object_id,
+        azuread_group.ca100_exclusion.object_id,
         azuread_group.ca200_exclusion.object_id,
         azuread_group.ca300_exclusion.object_id,
         azuread_group.ca400_exclusion.object_id,

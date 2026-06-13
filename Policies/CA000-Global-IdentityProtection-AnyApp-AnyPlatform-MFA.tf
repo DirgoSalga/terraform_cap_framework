@@ -22,19 +22,19 @@ resource "azuread_conditional_access_policy" "ca000" {
       included_users = ["All"]
       excluded_roles = ["d29b2b05-8046-44ba-8758-1e26182fcf32"]
       excluded_groups = [
+          azuread_group.breakglass.object_id,
           azuread_group.ca000_exclusion.object_id,
-          azuread_group.ca0100_exclusion.object_id,
-          azuread_group.ca014_exclusion.object_id,
-          azuread_group.ca015_exclusion.object_id,
-          azuread_group.ca018_exclusion.object_id,
-          azuread_group.ca026_exclusion.object_id,
-          azuread_group.ca028_exclusion.object_id,
+          azuread_group.ca101_exclusion.object_id,
+          azuread_group.ca105_exclusion.object_id,
+          azuread_group.ca200_exclusion.object_id,
+          azuread_group.ca300_exclusion.object_id,
+          azuread_group.ca400_exclusion.object_id,
         ]
     }
   }
 
   grant_controls {
     operator = "OR"
-    built_in_controls = ["mfa"]
+    authentication_strength_policy_id = "/policies/authenticationStrengthPolicies/00000000-0000-0000-0000-000000000002" # MFA
   }
 }

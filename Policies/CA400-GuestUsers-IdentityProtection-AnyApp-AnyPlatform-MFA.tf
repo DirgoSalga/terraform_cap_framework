@@ -1,14 +1,14 @@
 locals {
-  ca028 = "CA400-GuestUsers-IdentityProtection-AnyApp-AnyPlatform-MFA"
+  ca400 = "CA400-GuestUsers-IdentityProtection-AnyApp-AnyPlatform-MFA"
 }
 
-resource "azuread_group" "ca028_exclusion" {
-  display_name     = "${local.ca028}-Exclusion"
+resource "azuread_group" "ca400_exclusion" {
+  display_name     = "${local.ca400}-Exclusion"
   security_enabled = true
 }
 
-resource "azuread_conditional_access_policy" "ca028" {
-  display_name = local.ca028
+resource "azuread_conditional_access_policy" "ca400" {
+  display_name = local.ca400
   state        = "enabledForReportingButNotEnforced"
 
   conditions {
@@ -19,10 +19,10 @@ resource "azuread_conditional_access_policy" "ca028" {
     }
 
     users {
-      excluded_groups = concat(
-        ["2802b872-ccfb-4b29-a9a9-459808dfb11b", "349156c1-2fb1-4ffa-9cd3-5c4418e24e4c"],
-        [azuread_group.ca028_exclusion.object_id]
-      )
+      excluded_groups = [
+        azuread_group.breakglass.object_id,
+        azuread_group.ca400_exclusion.object_id
+      ]
       included_guests_or_external_users {
         guest_or_external_user_types = ["internalGuest", "b2bCollaborationGuest", "b2bCollaborationMember", "b2bDirectConnectUser", "otherExternalUser", "serviceProvider"]
         external_tenants {
@@ -33,7 +33,7 @@ resource "azuread_conditional_access_policy" "ca028" {
   }
 
   grant_controls {
-    operator = "OR"
-    built_in_controls = ["mfa"]
+    operator                          = "OR"
+    authentication_strength_policy_id = "/policies/authenticationStrengthPolicies/00000000-0000-0000-0000-000000000002" # MFA
   }
 }

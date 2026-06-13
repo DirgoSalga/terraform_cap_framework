@@ -32,6 +32,6 @@ resource "azuread_named_location" "eu" {
       "SK", # Slovakia
     ]
 
-   include_unknown_countries_and_regions = false
+    include_unknown_countries_and_regions = false
   }
 }

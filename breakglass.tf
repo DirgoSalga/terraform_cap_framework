@@ -1,7 +1,7 @@
 resource "azuread_user" "breakglass_1" {
-  user_principal_name = var.breakglass_upn_1
-  display_name        = "Emergency Access 1"
-  account_enabled     = true
+  user_principal_name         = var.breakglass_upn_1
+  display_name                = "Emergency Access 1"
+  account_enabled             = true
   disable_password_expiration = true
 
   # Set a strong initial password. Rotate this immediately after first use
@@ -10,9 +10,9 @@ resource "azuread_user" "breakglass_1" {
 }
 
 resource "azuread_user" "breakglass_2" {
-  user_principal_name = var.breakglass_upn_2
-  display_name        = "Emergency Access 2"
-  account_enabled     = true
+  user_principal_name         = var.breakglass_upn_2
+  display_name                = "Emergency Access 2"
+  account_enabled             = true
   disable_password_expiration = true
 
   password = "ChangeMe!InitialP@sswd2"

@@ -22,19 +22,19 @@ resource "azuread_conditional_access_policy" "ca000" {
       included_users = ["All"]
       excluded_roles = [] # Exclude directory synchronization roles if needed
       excluded_groups = [
-          azuread_group.breakglass.object_id,
-          azuread_group.ca000_exclusion.object_id,
-          azuread_group.ca101_exclusion.object_id,
-          azuread_group.ca105_exclusion.object_id,
-          azuread_group.ca200_exclusion.object_id,
-          azuread_group.ca300_exclusion.object_id,
-          azuread_group.ca400_exclusion.object_id,
-        ]
+        azuread_group.breakglass.object_id,
+        azuread_group.ca000_exclusion.object_id,
+        azuread_group.ca101_exclusion.object_id,
+        azuread_group.ca105_exclusion.object_id,
+        azuread_group.ca200_exclusion.object_id,
+        azuread_group.ca300_exclusion.object_id,
+        azuread_group.ca400_exclusion.object_id,
+      ]
     }
   }
 
   grant_controls {
-    operator = "OR"
+    operator                          = "OR"
     authentication_strength_policy_id = "/policies/authenticationStrengthPolicies/00000000-0000-0000-0000-000000000002" # MFA
   }
 }

@@ -28,7 +28,7 @@ resource "azuread_conditional_access_policy" "ca002" {
   }
 
   grant_controls {
-    operator = "OR"
+    operator          = "OR"
     built_in_controls = ["block"]
   }
 }

@@ -28,7 +28,7 @@ resource "azuread_conditional_access_policy" "ca003" {
   }
 
   grant_controls {
-    operator = "OR"
+    operator                          = "OR"
     authentication_strength_policy_id = "/policies/authenticationStrengthPolicies/00000000-0000-0000-0000-000000000002" # MFA
   }
 }

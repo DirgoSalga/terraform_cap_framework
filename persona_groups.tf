@@ -21,3 +21,11 @@ resource "azuread_group" "internals_persona" {
     rule    = var.internals_persona_dynamic_membership_rule
   }
 }
+
+resource "azuread_group" "service_accounts_persona" {
+  display_name     = var.service_accounts_persona_group_name
+  description      = "Assigned group for accounts in the service accounts persona."
+  security_enabled = true
+
+  members = var.service_accounts_persona_member_object_ids
+}

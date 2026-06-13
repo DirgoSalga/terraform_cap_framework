@@ -39,3 +39,15 @@ variable "internals_persona_dynamic_membership_rule" {
   type        = string
   default     = "(user.companyName -eq \"DirgoSalga\")"
 }
+
+variable "service_accounts_persona_group_name" {
+  description = "Display name for the assigned service accounts persona group."
+  type        = string
+  default     = "CA-Persona-ServiceAccounts"
+}
+
+variable "service_accounts_persona_member_object_ids" {
+  description = "Object IDs for members of the service accounts persona group."
+  type        = set(string)
+  default     = []
+}

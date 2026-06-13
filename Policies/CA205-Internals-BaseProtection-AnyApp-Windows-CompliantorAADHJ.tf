@@ -1,14 +1,14 @@
 locals {
-  ca020 = "CA205-Internals-BaseProtection-AnyApp-Windows-CompliantorAADHJ"
+  ca205 = "CA205-Internals-BaseProtection-AnyApp-Windows-CompliantorAADHJ"
 }
 
-resource "azuread_group" "ca020_exclusion" {
-  display_name     = "${local.ca020}-Exclusion"
+resource "azuread_group" "ca205_exclusion" {
+  display_name     = "${local.ca205}-Exclusion"
   security_enabled = true
 }
 
-resource "azuread_conditional_access_policy" "ca020" {
-  display_name = local.ca020
+resource "azuread_conditional_access_policy" "ca205" {
+  display_name = local.ca205
   state        = "enabledForReportingButNotEnforced"
 
   conditions {
@@ -20,11 +20,11 @@ resource "azuread_conditional_access_policy" "ca020" {
     }
 
     users {
-      included_groups = ["ceeac9b8-ddf5-48cb-afcb-e2ab8bfd1a57"]
-      excluded_groups = concat(
-        ["2802b872-ccfb-4b29-a9a9-459808dfb11b", "a76676e6-d7f2-45ff-9973-d6a28680db56"],
-        [azuread_group.ca020_exclusion.object_id]
-      )
+      included_groups = [azuread_group.internals_persona.object_id]
+      excluded_groups = [
+        azuread_group.breakglass.object_id,
+        azuread_group.ca205_exclusion.object_id
+      ]
     }
 
     platforms {
@@ -33,7 +33,7 @@ resource "azuread_conditional_access_policy" "ca020" {
   }
 
   grant_controls {
-    operator = "OR"
+    operator          = "OR"
     built_in_controls = ["compliantDevice", "domainJoinedDevice"]
   }
 }

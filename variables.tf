@@ -27,3 +27,15 @@ variable "admin_persona_dynamic_membership_rule" {
   type        = string
   default     = "(user.userPrincipalName -startsWith \"adm.\") -and (user.userPrincipalName -endsWith \".onmicrosoft.com\")"
 }
+
+variable "internals_persona_group_name" {
+  description = "Display name for the dynamic internals persona group."
+  type        = string
+  default     = "CA-Persona-Internals"
+}
+
+variable "internals_persona_dynamic_membership_rule" {
+  description = "Dynamic membership rule for the internals persona group."
+  type        = string
+  default     = "(user.companyName -eq \"DirgoSalga\")"
+}

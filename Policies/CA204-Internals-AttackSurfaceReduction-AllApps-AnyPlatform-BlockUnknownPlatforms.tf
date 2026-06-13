@@ -1,14 +1,14 @@
 locals {
-  ca019 = "CA204-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms"
+  ca204 = "CA204-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms"
 }
 
-resource "azuread_group" "ca019_exclusion" {
-  display_name     = "${local.ca019}-Exclusion"
+resource "azuread_group" "ca204_exclusion" {
+  display_name     = "${local.ca204}-Exclusion"
   security_enabled = true
 }
 
-resource "azuread_conditional_access_policy" "ca019" {
-  display_name = local.ca019
+resource "azuread_conditional_access_policy" "ca204" {
+  display_name = local.ca204
   state        = "enabledForReportingButNotEnforced"
 
   conditions {
@@ -19,11 +19,11 @@ resource "azuread_conditional_access_policy" "ca019" {
     }
 
     users {
-      included_groups = ["ceeac9b8-ddf5-48cb-afcb-e2ab8bfd1a57"]
-      excluded_groups = concat(
-        ["2802b872-ccfb-4b29-a9a9-459808dfb11b", "5002e94c-71d0-49ef-9633-b15168b0774c"],
-        [azuread_group.ca019_exclusion.object_id]
-      )
+      included_groups = [azuread_group.internals_persona.object_id]
+      excluded_groups = [
+        azuread_group.breakglass.object_id,
+        azuread_group.ca204_exclusion.object_id
+      ]
     }
 
     platforms {
@@ -33,7 +33,7 @@ resource "azuread_conditional_access_policy" "ca019" {
   }
 
   grant_controls {
-    operator = "OR"
+    operator          = "OR"
     built_in_controls = ["block"]
   }
 }

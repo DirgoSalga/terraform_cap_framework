@@ -20,7 +20,7 @@ resource "azuread_conditional_access_policy" "ca000" {
 
     users {
       included_users = ["All"]
-      excluded_roles = ["d29b2b05-8046-44ba-8758-1e26182fcf32"]
+      excluded_roles = [] # Exclude directory synchronization roles if needed
       excluded_groups = [
           azuread_group.breakglass.object_id,
           azuread_group.ca000_exclusion.object_id,

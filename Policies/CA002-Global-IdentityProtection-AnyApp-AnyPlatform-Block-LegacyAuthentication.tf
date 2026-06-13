@@ -20,10 +20,10 @@ resource "azuread_conditional_access_policy" "ca002" {
 
     users {
       included_users = ["All"]
-      excluded_groups = concat(
-        ["2802b872-ccfb-4b29-a9a9-459808dfb11b", "8861a932-f1d1-4d1d-a5e6-cdce20fada27"],
-        [azuread_group.ca002_exclusion.object_id]
-      )
+      excluded_groups = [
+        azuread_group.breakglass.object_id,
+        azuread_group.ca002_exclusion.object_id
+      ]
     }
   }
 

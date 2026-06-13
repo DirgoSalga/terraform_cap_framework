@@ -1,5 +1,5 @@
 locals {
-  ca004 = "CA004-Global-IdentityProtection-AnyApp-AnyPlatform-AuthenticationFlows"
+  ca004 = "CA004-Global-IdentityProtection-AnyApp-AnyPlatform-DeviceCodeFlow-Block"
 }
 
 resource "azuread_group" "ca004_exclusion" {
@@ -12,8 +12,8 @@ resource "azuread_conditional_access_policy" "ca004" {
   state        = "enabledForReportingButNotEnforced"
 
   conditions {
-    client_app_types = ["all"]
-    authentication_flow_transfer_methods = ["deviceCodeFlow", "authenticationTransfer"]
+    client_app_types                     = ["all"]
+    authentication_flow_transfer_methods = ["deviceCodeFlow"]
 
     applications {
       included_applications = ["All"]
@@ -21,15 +21,15 @@ resource "azuread_conditional_access_policy" "ca004" {
 
     users {
       included_users = ["All"]
-      excluded_groups = concat(
-        ["2802b872-ccfb-4b29-a9a9-459808dfb11b", "f389fc8e-3965-4ae0-aa53-87511ab05f2b"],
-        [azuread_group.ca004_exclusion.object_id]
-      )
+      excluded_groups = [
+        azuread_group.breakglass.object_id,
+        azuread_group.ca004_exclusion.object_id
+      ]
     }
   }
 
   grant_controls {
-    operator = "OR"
+    operator          = "OR"
     built_in_controls = ["block"]
   }
 }

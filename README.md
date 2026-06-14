@@ -122,6 +122,16 @@ Apply after review:
 terraform apply
 ```
 
+Review deployment outputs:
+
+```sh
+terraform output
+terraform output conditional_access_policies
+terraform output conditional_access_exclusion_groups
+```
+
+The outputs include policy IDs, exclusion group object IDs, persona groups, named locations, and emergency access account UPNs. Passwords are intentionally not output.
+
 ## Policy Notes
 
 - Policy naming follows the `CA###-Persona-Control-Apps-Platform-Outcome` convention.

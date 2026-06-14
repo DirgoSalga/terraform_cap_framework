@@ -19,16 +19,16 @@ resource "azuread_conditional_access_policy" "ca301" {
     }
 
     users {
-      included_groups = [azuread_group.service_accounts_persona.object_id]
+      included_groups = [var.service_accounts_persona_group_object_id]
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca301_exclusion.object_id
       ]
     }
 
     locations {
       included_locations = ["All"]
-      excluded_locations = [azuread_named_location.eu.object_id]
+      excluded_locations = [var.eu_named_location_object_id]
     }
   }
 

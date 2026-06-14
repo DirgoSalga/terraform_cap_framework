@@ -1,0 +1,15 @@
+breakglass_upn_1 = "btg.1@example.com"
+breakglass_upn_2 = "btg.2@example.com"
+
+breakglass_group_name = "CA-Emergency-Access-Exclusion"
+
+admin_persona_group_name = "CA-Persona-Admins"
+admin_persona_dynamic_membership_rule = "(user.userPrincipalName -startsWith \"adm.\") -and (user.userPrincipalName -endsWith \".onmicrosoft.com\")"
+
+internals_persona_group_name = "CA-Persona-Internals"
+internals_persona_dynamic_membership_rule = "(user.companyName -eq \"Example Corp\")"
+
+service_accounts_persona_group_name = "CA-Persona-ServiceAccounts"
+service_accounts_persona_member_object_ids = [
+  "00000000-0000-0000-0000-000000000000",
+]

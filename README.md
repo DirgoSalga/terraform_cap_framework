@@ -33,10 +33,12 @@ The AzureAD provider can authenticate using any supported provider method, inclu
 
 ```text
 .
+├── main.tf                # Calls the Policies child module
 ├── breakglass.tf          # Emergency access users and exclusion group
 ├── named_locations.tf     # Named locations used by location-based policies
 ├── persona_groups.tf      # Persona groups used by policy assignments
 ├── providers.tf           # AzureAD provider configuration
+├── terraform.tfvars.example # Example variable values
 ├── variables.tf           # Configurable names, UPNs, rules, and membership
 ├── versions.tf            # Terraform and provider version constraints
 ├── conversion_warnings.md # Notes for settings not represented in Terraform
@@ -77,7 +79,7 @@ Common variables include:
 - `service_accounts_persona_group_name`
 - `service_accounts_persona_member_object_ids`
 
-Example `terraform.tfvars`:
+See `terraform.tfvars.example` for a complete starting point. Example `terraform.tfvars`:
 
 ```hcl
 breakglass_upn_1 = "btg.1@example.com"

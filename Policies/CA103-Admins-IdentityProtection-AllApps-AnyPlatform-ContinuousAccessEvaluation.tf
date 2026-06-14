@@ -21,7 +21,7 @@
 #     }
 
 #     users {
-#       included_groups = [azuread_group.admin_persona.object_id]
+#       included_groups = [var.admin_persona_group_object_id]
 #       # included_roles = [
 #       #   "9b895d92-2cd3-44c7-9d02-a6ac2d5ea5c3", # Application Administrator
 #       #   "c4e39bd9-1100-46d3-8c65-fb160da0071f", # Authentication Administrator
@@ -49,7 +49,7 @@
 #       #   "1707125e-0aa2-4d4d-8655-a7c786c76a25"  # Microsoft 365 Backup Administrator
 #       # ]
 #       excluded_groups = [
-#         azuread_group.breakglass.object_id,
+#         var.breakglass_group_object_id,
 #         azuread_group.ca103_exclusion.object_id
 #       ]
 #     }

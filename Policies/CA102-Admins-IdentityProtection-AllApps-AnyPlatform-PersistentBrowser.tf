@@ -19,7 +19,7 @@ resource "azuread_conditional_access_policy" "ca102" {
     }
 
     users {
-      included_groups = [azuread_group.admin_persona.object_id]
+      included_groups = [var.admin_persona_group_object_id]
       # included_roles = [
       #   "9b895d92-2cd3-44c7-9d02-a6ac2d5ea5c3", # Application Administrator
       #   "c4e39bd9-1100-46d3-8c65-fb160da0071f", # Authentication Administrator
@@ -46,7 +46,7 @@ resource "azuread_conditional_access_policy" "ca102" {
       #   "11451d60-acb2-45eb-a7d6-43d0f0125c13"  # Windows 365 Administrator
       # ]
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca102_exclusion.object_id
       ]
     }

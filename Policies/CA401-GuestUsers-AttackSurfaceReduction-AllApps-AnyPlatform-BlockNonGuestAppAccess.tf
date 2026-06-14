@@ -17,13 +17,14 @@ resource "azuread_conditional_access_policy" "ca401" {
     applications {
       included_applications = ["All"]
       excluded_applications = [
-        "2793995e-0a7d-40d7-bd35-6968ba142197", #MyApps
-        "Office365"]
+        "2793995e-0a7d-40d7-bd35-6968ba142197", # MyApps
+        "Office365",
+      ]
     }
 
     users {
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca401_exclusion.object_id
       ]
       included_guests_or_external_users {

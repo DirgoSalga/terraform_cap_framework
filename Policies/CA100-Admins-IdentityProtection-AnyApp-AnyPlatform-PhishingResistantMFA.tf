@@ -20,7 +20,7 @@ resource "azuread_conditional_access_policy" "ca100" {
     }
 
     users {
-      included_groups = [azuread_group.admin_persona.object_id]
+      included_groups = [var.admin_persona_group_object_id]
       # included_roles = [
       #   "62e90394-69f5-4237-9190-012177145e10", # Global Administrator
       #   "194ae4cb-b126-40b2-bd5b-6091b380977d", # Security Administrator
@@ -48,7 +48,7 @@ resource "azuread_conditional_access_policy" "ca100" {
       #   "11451d60-acb2-45eb-a7d6-43d0f0125c13"  # Windows 365 Administrator
       # ]
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca100_exclusion.object_id
       ]
     }

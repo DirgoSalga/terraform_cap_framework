@@ -19,7 +19,7 @@ resource "azuread_conditional_access_policy" "ca101" {
     }
 
     users {
-      included_groups = [azuread_group.admin_persona.object_id]
+      included_groups = [var.admin_persona_group_object_id]
       # included_roles = [
       #   "c4e39bd9-1100-46d3-8c65-fb160da0071f", # Authentication Administrator
       #   "b0f54661-2d74-4c50-afa3-1ec803f12efe", # Billing Administrator
@@ -47,7 +47,7 @@ resource "azuread_conditional_access_policy" "ca101" {
       #   "e93e3737-fa85-474a-aee4-7d3fb86510f3"  # Dragon Administrator
       # ]
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca101_exclusion.object_id
       ]
     }

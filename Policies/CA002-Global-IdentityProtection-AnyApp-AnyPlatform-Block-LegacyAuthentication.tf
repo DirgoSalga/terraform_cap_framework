@@ -21,7 +21,7 @@ resource "azuread_conditional_access_policy" "ca002" {
     users {
       included_users = ["All"]
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca002_exclusion.object_id
       ]
     }

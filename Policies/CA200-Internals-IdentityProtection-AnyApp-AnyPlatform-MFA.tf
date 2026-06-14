@@ -19,9 +19,9 @@ resource "azuread_conditional_access_policy" "ca200" {
     }
 
     users {
-      included_groups = [azuread_group.internals_persona.object_id]
+      included_groups = [var.internals_persona_group_object_id]
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca200_exclusion.object_id
       ]
     }

@@ -20,7 +20,7 @@ resource "azuread_conditional_access_policy" "ca402" {
 
     users {
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca402_exclusion.object_id
       ]
       included_guests_or_external_users {

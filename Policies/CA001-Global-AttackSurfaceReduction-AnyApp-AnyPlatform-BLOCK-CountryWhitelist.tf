@@ -21,14 +21,14 @@ resource "azuread_conditional_access_policy" "ca001" {
     users {
       included_users = ["All"]
       excluded_groups = [
-        azuread_group.breakglass.object_id,
+        var.breakglass_group_object_id,
         azuread_group.ca001_exclusion.object_id
       ]
     }
 
     locations {
       included_locations = ["All"]
-      excluded_locations = [azuread_named_location.eu.id]
+      excluded_locations = [var.eu_named_location_id]
     }
   }
 

@@ -28,7 +28,7 @@ resource "azuread_conditional_access_policy" "ca001" {
 
     locations {
       included_locations = ["All"]
-      excluded_locations = [var.eu_named_location_id]
+      excluded_locations = [var.eu_named_location_object_id]
     }
   }
 

@@ -22,7 +22,7 @@ Review sign-in impact before changing policies to enforced mode.
 
 ## Requirements
 
-- Terraform `>= 1.6.0`
+- Terraform `>= 1.15.0`
 - AzureAD provider `~> 3.8`
 - Microsoft Entra ID tenant with the licensing required for Conditional Access
 - Permissions to create users, groups, named locations, and Conditional Access policies
